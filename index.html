@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pedido</title>
+  <style>
+    body {
+      background-color: black;
+      color: blue;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+    }
+
+    #nao {
+      position: absolute;
+      background-color: red;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 10px;
+    }
+
+    #sim {
+      margin-top: 20px;
+      background-color: green;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 10px;
+    }
+
+    #imagem {
+      display: none;
+      margin-top: 30px;
+    }
+
+    #imagem img {
+      width: 300px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px pink;
+    }
+  </style>
+</head>
+<body>
+  <h1>Me dá um beijo?</h1>
+
+  <button id="nao">Não</button>
+  <button id="sim">Sim</button>
+
+  <div id="imagem">
+    <img src="beijo.png" alt="Beijo" />
+  </div>
+
+  <script>
+    const btnNao = document.getElementById("nao");
+    const btnSim = document.getElementById("sim");
+    const imagem = document.getElementById("imagem");
+    let tentativas = 0;
+
+    btnNao.addEventListener("mouseover", () => {
+      if (tentativas < 6) {
+        const x = Math.random() * (window.innerWidth - 100);
+        const y = Math.random() * (window.innerHeight - 50);
+        btnNao.style.left = `${x}px`;
+        btnNao.style.top = `${y}px`;
+        tentativas++;
+      } else {
+        btnNao.style.display = "none";
+      }
+    });
+
+    btnSim.addEventListener("click", () => {
+      imagem.style.display = "block";
+    });
+  </script>
+</body>
+</html>
