@@ -10,6 +10,9 @@
       font-family: Arial, sans-serif;
       text-align: center;
       margin-top: 100px;
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
     }
 
     #nao {
@@ -21,6 +24,7 @@
       cursor: pointer;
       font-size: 16px;
       border-radius: 10px;
+      user-select: none;
     }
 
     #sim {
@@ -59,24 +63,6 @@
   <script>
     const btnNao = document.getElementById("nao");
     const btnSim = document.getElementById("sim");
-    const imagem = document.getElementById("imagem");
-    let tentativas = 0;
+    const imagem = document.getElementById("im
 
-    btnNao.addEventListener("mouseover", () => {
-      if (tentativas < 6) {
-        const x = Math.random() * (window.innerWidth - 100);
-        const y = Math.random() * (window.innerHeight - 50);
-        btnNao.style.left = `${x}px`;
-        btnNao.style.top = `${y}px`;
-        tentativas++;
-      } else {
-        btnNao.style.display = "none";
-      }
-    });
 
-    btnSim.addEventListener("click", () => {
-      imagem.style.display = "block";
-    });
-  </script>
-</body>
-</html>
