@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Me dá um beijo?</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #00f;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    h1 {
+      font-size: 50px;
+      margin-bottom: 40px;
+    }
+    .btn-area {
+      position: relative;
+      width: 300px;
+      height: 150px;
+      margin-bottom: 20px;
+    }
+    button {
+      position: absolute;
+      padding: 15px 30px;
+      font-size: 24px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    #noBtn {
+      background-color: #f00;
+      color: #fff;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    #yesBtn {
+      background-color: #0f0;
+      color: #000;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      display: none;
+    }
+    #imgBeijo {
+      display: none;
+      max-width: 80%;
+      height: auto;
+      border: 5px solid #00f;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Me dá um beijo?</h1>
+  <div class="btn-area">
+    <button id="noBtn">Não</button>
+    <button id="yesBtn">Sim</button>
+  </div>
+  <img id="imgBeijo" src="beijinho.png" alt="Beijinho">
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const area = document.querySelector(".btn-area");
+    const img = document.getElementById("imgBeijo");
+    let tries = 0;
+
+    function moveNo() {
+      const rect = area.getBoundingClientRect();
+      const bw = noBtn.offsetWidth;
+      const bh = noBtn.offsetHeight;
+
+      const x = Math.random() * (rect.width - bw);
+      const y = Math.random() * (rect.height - bh);
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+
+      tries++;
+      if (tries >= 6) {
+        noBtn.style.display = "none";
+        yesBtn.style.display = "block";
+      }
+    }
+
+    noBtn.addEventListener("mouseover", moveNo);
+    noBtn.addEventListener("click", moveNo);
+
+    yesBtn.addEventListener("click", () => {
+      yesBtn.style.display = "none";
+      img.style.display = "block";
+    });
+  </script>
+</body>
+</html>
