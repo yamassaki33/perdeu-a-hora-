@@ -9,10 +9,15 @@
       color: blue;
       font-family: Arial, sans-serif;
       text-align: center;
-      margin-top: 100px;
+      margin: 0;
       position: relative;
       height: 100vh;
       overflow: hidden;
+    }
+
+    h1 {
+      margin-top: 80px;
+      font-size: 2.5rem;
     }
 
     #nao {
@@ -36,17 +41,7 @@
       cursor: pointer;
       font-size: 16px;
       border-radius: 10px;
-    }
-
-    #imagem {
-      display: none;
-      margin-top: 30px;
-    }
-
-    #imagem img {
-      width: 300px;
-      border-radius: 20px;
-      box-shadow: 0 0 20px pink;
+      position: relative;
     }
   </style>
 </head>
@@ -56,13 +51,28 @@
   <button id="nao">Não</button>
   <button id="sim">Sim</button>
 
-  <div id="imagem">
-    <img src="beijo.png" alt="Beijo" />
-  </div>
-
   <script>
     const btnNao = document.getElementById("nao");
-    const btnSim = document.getElementById("sim");
-    const imagem = document.getElementById("im
+
+    function moverBotao() {
+      const larguraJanela = window.innerWidth;
+      const alturaJanela = window.innerHeight;
+      const larguraBotao = btnNao.offsetWidth;
+      const alturaBotao = btnNao.offsetHeight;
+
+      const novaPosX = Math.random() * (larguraJanela - larguraBotao);
+      const novaPosY = Math.random() * (alturaJanela - alturaBotao);
+
+      btnNao.style.left = novaPosX + "px";
+      btnNao.style.top = novaPosY + "px";
+    }
+
+    btnNao.addEventListener("mouseenter", moverBotao);
+
+    // Posição inicial
+    moverBotao();
+  </script>
+</body>
+</html>
 
 
