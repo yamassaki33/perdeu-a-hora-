@@ -10,9 +10,9 @@
       font-family: Arial, sans-serif;
       text-align: center;
       margin: 0;
-      position: relative;
       height: 100vh;
       overflow: hidden;
+      position: relative;
     }
 
     h1 {
@@ -33,7 +33,7 @@
     }
 
     #sim {
-      margin-top: 20px;
+      display: none; /* escondido no começo */
       background-color: green;
       color: white;
       border: none;
@@ -41,7 +41,16 @@
       cursor: pointer;
       font-size: 16px;
       border-radius: 10px;
+      margin-top: 20px;
       position: relative;
+      z-index: 1;
+    }
+
+    .sim-container {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
     }
   </style>
 </head>
@@ -49,10 +58,16 @@
   <h1>Me dá um beijo?</h1>
 
   <button id="nao">Não</button>
-  <button id="sim">Sim</button>
+
+  <div class="sim-container">
+    <button id="sim">Sim</button>
+  </div>
 
   <script>
     const btnNao = document.getElementById("nao");
+    const btnSim = document.getElementById("sim");
+    const maxTentativas = 8;
+    let tentativas = 0;
 
     function moverBotao() {
       const larguraJanela = window.innerWidth;
@@ -61,18 +76,28 @@
       const alturaBotao = btnNao.offsetHeight;
 
       const novaPosX = Math.random() * (larguraJanela - larguraBotao);
-      const novaPosY = Math.random() * (alturaJanela - alturaBotao);
+      const novaPosY = Math.random() * (alturaJanela - alturaBotao - 100); // evita ficar embaixo do "Sim"
 
       btnNao.style.left = novaPosX + "px";
       btnNao.style.top = novaPosY + "px";
     }
 
-    btnNao.addEventListener("mouseenter", moverBotao);
+    btnNao.addEventListener("mouseenter", () => {
+      if (tentativas < maxTentativas) {
+        moverBotao();
+        tentativas++;
+        if (tentativas === maxTentativas) {
+          btnNao.style.display = "none";
+          btnSim.style.display = "inline-block";
+        }
+      }
+    });
 
-    // Posição inicial
-    moverBotao();
+    // Posição inicial aleatória ao carregar a página
+    window.onload = moverBotao;
   </script>
 </body>
 </html>
+
 
 
