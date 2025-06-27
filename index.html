@@ -30,6 +30,7 @@
       font-size: 16px;
       border-radius: 10px;
       user-select: none;
+      transition: top 0.2s ease, left 0.2s ease;
     }
 
     #sim {
@@ -42,15 +43,11 @@
       font-size: 16px;
       border-radius: 10px;
       margin-top: 20px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .sim-container {
-      position: absolute;
+      position: fixed;
       bottom: 40px;
       left: 50%;
       transform: translateX(-50%);
+      z-index: 10;
     }
   </style>
 </head>
@@ -58,10 +55,7 @@
   <h1>Me dá um beijo?</h1>
 
   <button id="nao">Não</button>
-
-  <div class="sim-container">
-    <button id="sim">Sim</button>
-  </div>
+  <button id="sim">Sim</button>
 
   <script>
     const btnNao = document.getElementById("nao");
@@ -75,13 +69,18 @@
       const larguraBotao = btnNao.offsetWidth;
       const alturaBotao = btnNao.offsetHeight;
 
+      // Gera posição aleatória dentro da tela, sem sair da área visível
       const novaPosX = Math.random() * (larguraJanela - larguraBotao);
-      const novaPosY = Math.random() * (alturaJanela - alturaBotao - 100); // evita ficar embaixo do "Sim"
+      const novaPosY = Math.random() * (alturaJanela - alturaBotao - 100); // para não ficar atrás do botão "Sim"
 
       btnNao.style.left = novaPosX + "px";
       btnNao.style.top = novaPosY + "px";
     }
 
+    // Posiciona o botão "Não" em lugar aleatório ao carregar a página
+    window.onload = moverBotao;
+
+    // Quando o mouse entrar no botão "Não", ele pula para outra posição até 8 vezes
     btnNao.addEventListener("mouseenter", () => {
       if (tentativas < maxTentativas) {
         moverBotao();
@@ -92,12 +91,6 @@
         }
       }
     });
-
-    // Posição inicial aleatória ao carregar a página
-    window.onload = moverBotao;
   </script>
 </body>
 </html>
-
-
-
